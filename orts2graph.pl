@@ -1,6 +1,12 @@
 #!/bin/env perl
 
 use strict;
+
+use FindBin;
+use lib $FindBin::Bin;
+use lib $FindBin::Bin . "/../GFFLib";
+
+
 use Bio::Graphics;
 use Bio::SeqFeature::Generic;
 use Getopt::Std;
@@ -722,4 +728,10 @@ for ( my $curr_index = 0 ; $curr_index <= $#order ; $curr_index++ ) {
 open OUTPUT, ">" . $outputFile;
 print OUTPUT $panel->svg;
 close OUTPUT;
+
+exit(0);
+
+sub test {
+	
+}
 
