@@ -12,14 +12,12 @@ sub new {
 
 	die
 "Error: Ort.pm, second argument of Ort constructor should be either \'gene\' or \'transcript\'\n"
-	  if ( defined $gene_identifying_feature
-		&& $gene_identifying_feature ne 'gene'
+	  if ( $gene_identifying_feature ne 'gene'
 		&& $gene_identifying_feature ne 'transcript' );
 
 	die
 "Error: Ort.pm, third argument of Ort constructor should be either \'RBH\', \'RBH_Calhoun\' or \'OMCL\'\n"
-	  if ( defined $format
-		&& $format ne 'RBH'
+	  if ( $format ne 'RBH'
 		&& $format ne 'RBH_Calhoun'
 		&& $format ne 'OMCL' );
 
