@@ -68,9 +68,10 @@ sub read_OMCL {
 		my $line = $_;
 		chomp $line;
 
-		my ( $org_name, $org_num ) = split " ", $line;
+		my ( $org_name, $org_num_hex ) = split " ", $line;
 
-		$org_num =~ s/G0*//;
+		$org_num_hex =~ s/^G*//;
+		my $org_num = hex( $org_num_hex);
 
 		$self->{org_num}{$org_name} = $org_num;
 		$self->{org_name}[$org_num] = $org_name;
@@ -101,10 +102,11 @@ sub read_OMCL {
 		my @fields = split " ", $orts_fields;
 		
 		foreach my $curr_field (@fields) {
-			my ( $org_num, $curr_gene ) =
+			my ( $org_num_hex, $curr_gene ) =
 			  ( $curr_field =~ /([\w\W]+?)\|([\w\W]+?)\(/ );
 
-			$org_num =~ s/G0*//;
+			$org_num_hex =~ s/^G*//;
+			my $org_num = hex($org_num_hex );
 
 			my $org_name = $self->{org_name}[$org_num];
 
