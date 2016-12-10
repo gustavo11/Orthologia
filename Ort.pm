@@ -222,8 +222,29 @@ sub add_annotation {
 	while(<IN>){
 		my $line = $_;
 		chomp($line);
-		my ($gene_identifier,$func_annot) = split "\t", $line;
+		my ($transcript,$gene_id,$locus_name,$func_annot) = split "\t", $line;
+
+		
+		my $gene_identifier;
+		if ( $self->{gene_identifying_feature} eq "transcript" ) {
+			$gene_identifier = $transcript;
+		}
+		elsif ( $self->{gene_identifying_feature} eq "gene" ) {
+			$gene_identifier = $gene_id;
+		}
+		elsif ( $self->{gene_identifying_feature} eq "locus_name" ) {
+			$gene_identifier = $locus_name;
+		}
+		else {
+			die "Unrecognizable gene identifying feature \'"
+			  . $self->{gene_identifying_feature} . "\'\n";
+		}
+		
 		$self->{gene_annot}{$gene_identifier} = $func_annot;
+		$self->{locus_name}{$gene_identifier} = $locus_name;
+		$self->{transcript}{$gene_identifier} = $transcript;
+		$self->{gene}{$gene_identifier}       = $gene_id;
+		
 	}
 	close(IN);
 }
