@@ -1,5 +1,8 @@
 #!/bin/env perl
 
+use FindBin;
+use lib $FindBin::Bin;
+
 use Data::Dumper;
 use Ort;
 use strict;
